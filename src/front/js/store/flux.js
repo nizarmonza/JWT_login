@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: () => {
-				sessionStore.removeItem("token");
+				sessionStorage.removeItem("token");
 				console.log("Logging out")
 				setStore({ token: null });
 			},
@@ -47,16 +47,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 		
 				try{
-				const resp = await fetch('https://3001-nizarmonza-jwtlogin-rde8ss680bv.ws-us69.gitpod.io/api/token', opts)
+				const resp = await fetch("https://3001-nizarmonza-jwtlogin-rde8ss680bv.ws-us71.gitpod.io/api/token", opts)
 				
 				if (resp.status !== 200){
-					
 					alert("There has been some error");
 					return false;
 				} 
 				
 				const data = await resp.json();
-				sessionStorage.setItem('token', data.access_token);
+				sessionStorage.setItem("token", data.access_token);
 				setStore({ token: data.access_token})
 				return true;
 				}
