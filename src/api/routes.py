@@ -25,9 +25,23 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-@api.route("/user", methods=["POST"])
+@api.route("/user/active", methods=["POST"])
 def active_user():
     print("Active User")
     body = request.get_json()
     one_user = User.query.filter_by(email=body["email"]).first()
     return jsonify(one_user.serialize()), 200 
+
+@api.route("/user", methods=["POST"])
+def create_user():
+    body = request.get_json()
+    email = body["email"]
+    password = body["password"]
+    full_name = body["full_name"]
+    phone_number = body["phone_number"]
+    user = User(email=email, password=password, full_name=full_name, phone_number=phone_number)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return (jsonify(user.serialize())), 201

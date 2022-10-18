@@ -6,7 +6,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Login, login } from "./pages/login";
 import { Single } from "./pages/single";
-import injectContext from "./store/appContext";
+import injectContext from "./store/appContext";    
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
